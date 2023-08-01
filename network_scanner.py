@@ -1,6 +1,7 @@
 import socket
 import subprocess
 import sys
+import nmap
 
 
 def remove_last_octet(ip_address):
@@ -24,7 +25,7 @@ def get_local_ip():
 def scan_local_network(ip_address):
     ip_range = remove_last_octet(ip_address)
     # TODO: for debug original value 1, 254
-    start, end = 1, 254
+    start, end = 1, 2
     active_hosts = []
     for host in range(start, end):
         target_ip = ip_range + "." + str(host)
@@ -38,10 +39,6 @@ def scan_local_network(ip_address):
 
 
 def run_nmap_scan(ip):
-    cmd = f'nmap {ip} -Pn'
-    try:
-        output = subprocess.check_output(cmd, shell=True, text=True)
-        print(output)
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
-        sys.exit(1)
+    nm = nmap.PortScanner()
+    scan_range = nm.scan(hosts=ip)
+    return scan_range['scan']

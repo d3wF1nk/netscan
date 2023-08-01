@@ -1,5 +1,5 @@
 from network_scanner import get_local_ip, scan_local_network, remove_last_octet, run_nmap_scan
-from print_utils import print_banner, print_scanning_dots
+from print_utils import print_banner, print_scanning_dots, print_tcp_properties
 
 if __name__ == "__main__":
     print_banner()
@@ -23,7 +23,8 @@ if __name__ == "__main__":
                 if 0 <= device_number < len(hosts):
                     ip, name = hosts[device_number]
                     print(f"Scanning selected device: IP: {ip} - Name: {name}")
-                    run_nmap_scan(ip)
+                    rs = run_nmap_scan(ip)
+                    print_tcp_properties(ip, rs)
                 else:
                     print("Invalid device number.")
             except ValueError:
