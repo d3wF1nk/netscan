@@ -25,7 +25,7 @@ def get_local_ip():
 def scan_local_network(ip_address):
     ip_range = remove_last_octet(ip_address)
     # TODO: for debug original value 1, 254
-    start, end = 1, 2
+    start, end = 1, 254
     active_hosts = []
     for host in range(start, end):
         target_ip = ip_range + "." + str(host)
