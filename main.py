@@ -1,4 +1,4 @@
-from network_scanner import get_local_ip, scan_local_network, remove_last_octet
+from network_scanner import get_local_ip, scan_local_network, remove_last_octet, run_nmap_scan
 from print_utils import print_banner, print_scanning_dots
 
 if __name__ == "__main__":
@@ -16,7 +16,20 @@ if __name__ == "__main__":
         for i, (ip, name) in enumerate(hosts, 0):
             print(f"IP: {ip} - [{name}][{i}]")
 
+        decimal_value = input("\n[insert decimal value] or (press Enter to scan all devices): ")
+        if decimal_value:
+            try:
+                device_number = int(decimal_value)
+                if 0 <= device_number < len(hosts):
+                    ip, name = hosts[device_number]
+                    print(f"Scanning selected device: IP: {ip} - Name: {name}")
+                    run_nmap_scan(ip)
+                else:
+                    print("Invalid device number.")
+            except ValueError:
+                print("Invalid input.")
+        else:
+            print("Scanning all devices...")
     else:
         print(f"ERROR: CANT_GET_LOCAL_IP")
-
     print(f"\n")

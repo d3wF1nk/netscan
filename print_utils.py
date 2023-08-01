@@ -1,5 +1,6 @@
 import time
 
+
 def print_banner():
     banner = r"""
       :::::::::  :::::::::: :::    :::  ::::::::  :::    :::  ::::::::   :::::::: 
@@ -11,6 +12,7 @@ def print_banner():
 #########  ###        ###    ### ########## ###    ### ##########  ########       
     """
     print(banner)
+
 
 def print_scanning_dots():
     for _ in range(3):
