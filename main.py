@@ -1,3 +1,5 @@
+import time
+
 from network_scanner import get_local_ip, scan_local_network, remove_last_octet, run_nmap_scan
 from print_utils import print_banner, print_scanning_dots, print_tcp_properties, print_debug, set_debug_mode
 import argparse
@@ -33,6 +35,12 @@ def main():
                 print("Invalid input.")
         else:
             print("Scanning all devices...")
+            print_scanning_dots()
+            for i, (ip, name) in enumerate(hosts, 0):
+                print(f"Scanning device: IP: {ip} - Name: {name}")
+                rs = run_nmap_scan(ip)
+                print_tcp_properties(ip, rs)
+                time.sleep(1)
     else:
         print(f"ERROR: CANT_GET_LOCAL_IP")
 
