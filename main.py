@@ -14,7 +14,7 @@ def main():
         ip_range = remove_last_octet(local_ip)
         start, end = 1, 254
         if debug_mode:
-            start, end = 100, 105
+            start, end = 1, 2
         print(f"SCANNING {ip_range}.{start} -> {ip_range}.{end}:\n")
         print_scanning_dots()
         hosts = scan_local_network(local_ip, start, end)
