@@ -10,13 +10,12 @@ def set_debug_mode(value):
 
 def print_tcp_properties(ip, rs):
     if ip in rs:
-        print(rs[ip])
         if 'mac' in rs[ip]['addresses']:
             mac_address = rs[ip]['addresses']['mac']
             vendor = rs[ip]['vendor'][mac_address]
             print(f"MAC Address: {mac_address}")
             print(f"Vendor: {vendor}")
-            print()
+        print()
 
         if 'tcp' in rs[ip]:
             tcp_properties = rs[ip]['tcp']
