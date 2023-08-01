@@ -30,6 +30,9 @@ def print_tcp_properties(ip, rs):
                 print(f"  Conf: {port_info['conf']}")
                 print(f"  CPE: {port_info['cpe']}")
                 print()
+    else:
+        print()
+
 
 
 def print_banner():
