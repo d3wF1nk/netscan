@@ -1,9 +1,13 @@
 import socket
+import subprocess
+import sys
+
 
 def remove_last_octet(ip_address):
     parts = ip_address.split(".")
     ip_range = ".".join(parts[:-1])
     return ip_range
+
 
 def get_local_ip():
     try:
@@ -16,13 +20,15 @@ def get_local_ip():
         print(f"ERROR: {e}")
         return None
 
+
 def scan_local_network(ip_address):
     ip_range = remove_last_octet(ip_address)
-    nstart, nend = 1, 254    
+    start, end = 1, 254
     active_hosts = []
-
-    for host in range(nstart, nend):
+    print("::", end=" ")
+    for host in range(start, end):
         target_ip = ip_range + "." + str(host)
+        print(f'.{host}', end=" ")
         try:
             hostname = socket.gethostbyaddr(target_ip)
             active_hosts.append((target_ip, hostname[0]))
@@ -30,3 +36,13 @@ def scan_local_network(ip_address):
             pass
 
     return active_hosts
+
+
+def run_nmap_scan(ip):
+    cmd = f'nmap {ip} -Pn'
+    try:
+        output = subprocess.check_output(cmd, shell=True, text=True)
+        print(output)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e}")
+        sys.exit(1)

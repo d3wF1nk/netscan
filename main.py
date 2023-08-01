@@ -13,7 +13,7 @@ if __name__ == "__main__":
         print_scanning_dots()
         hosts = scan_local_network(local_ip)
 
-        for i, (ip, name) in enumerate(hosts, 1):
+        for i, (ip, name) in enumerate(hosts, 0):
             print(f"IP: {ip} - [{name}][{i}]")
 
     else:
